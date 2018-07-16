@@ -182,9 +182,9 @@ public class SerialPortManager extends SerialPort {
     private void startReadThread() {
         mSerialPortReadThread = new SerialPortReadThread(mFileInputStream) {
             @Override
-            public void onDataReceived(byte[] bytes) {
+            public void onDataReceived(byte[] bytes,int size) {
                 if (null != mOnSerialPortDataListener) {
-                    mOnSerialPortDataListener.onDataReceived(bytes);
+                    mOnSerialPortDataListener.onDataReceived(bytes,size);
                 }
             }
         };

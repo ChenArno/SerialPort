@@ -14,7 +14,7 @@ import java.io.InputStream;
 
 public abstract class SerialPortReadThread extends Thread {
 
-    public abstract void onDataReceived(byte[] bytes);
+    public abstract void onDataReceived(byte[] bytes,int size);
 
     private static final String TAG = SerialPortReadThread.class.getSimpleName();
     private InputStream mInputStream;
@@ -23,7 +23,6 @@ public abstract class SerialPortReadThread extends Thread {
 
     public SerialPortReadThread(InputStream inputStream) {
         mInputStream = inputStream;
-
         mReadBuffer = new byte[1024];
 //        try {
 //            int bufflenth = inputStream.available();
@@ -42,18 +41,28 @@ public abstract class SerialPortReadThread extends Thread {
                 if (null == mInputStream) {
                     return;
                 }
-                int size = mInputStream.read(mReadBuffer);
+                int available = mInputStream.available();
 
-                if (-1 == size || 0 >= size) {
-                    return;
+                if(available > 0){
+                    int size = mInputStream.read(mReadBuffer);
+                    if(size > 0){
+                        byte[] temp = new byte[size];
+                        System.arraycopy(mReadBuffer, 0, temp, 0, size);
+                        onDataReceived(temp,size);
+                    }
                 }
-
-                byte[] readBytes = new byte[size];
-
-                System.arraycopy(mReadBuffer, 0, readBytes, 0, size);
-
-                //Log.i(TAG, "run: readBytes = " + new String(readBytes));
-                onDataReceived(readBytes);
+//                int size = mInputStream.read(mReadBuffer);
+//
+//                if (-1 == size || 0 >= size) {
+//                    return;
+//                }
+//
+//                byte[] readBytes = new byte[size];
+//
+//                System.arraycopy(mReadBuffer, 0, readBytes, 0, size);
+//
+//                //Log.i(TAG, "run: readBytes = " + new String(readBytes));
+//                onDataReceived(readBytes);
 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         SerialPortManager serialPortManager = new SerialPortManager();
         serialPortManager.setOnSerialPortDataListener(new OnSerialPortDataListener() {
             @Override
-            public void onDataReceived(byte[] bytes) {
-                Log.i(TAG, "onDataReceived: "+ ByteUtil.bytes2HexStr(bytes));
+            public void onDataReceived(byte[] bytes,int size) {
+                Log.i(TAG, "onDataReceived: "+ ByteUtil.byteArrayToString(bytes,0,size));
             }
 
             @Override

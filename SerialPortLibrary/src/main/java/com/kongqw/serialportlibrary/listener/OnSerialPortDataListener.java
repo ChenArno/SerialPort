@@ -12,7 +12,7 @@ public interface OnSerialPortDataListener {
      *
      * @param bytes 接收到的数据
      */
-    void onDataReceived(byte[] bytes);
+    void onDataReceived(byte[] bytes,int size);
 
     /**
      * 数据发送
