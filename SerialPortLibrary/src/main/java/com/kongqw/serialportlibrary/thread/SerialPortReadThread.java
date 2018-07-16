@@ -24,13 +24,13 @@ public abstract class SerialPortReadThread extends Thread {
     public SerialPortReadThread(InputStream inputStream) {
         mInputStream = inputStream;
 
-//        mReadBuffer = new byte[1024];
-        try {
-            int bufflenth = inputStream.available();
-            mReadBuffer = new byte[bufflenth];
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        mReadBuffer = new byte[1024];
+//        try {
+//            int bufflenth = inputStream.available();
+//            mReadBuffer = new byte[bufflenth];
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
     }
 
     @Override
