@@ -2,6 +2,8 @@ package com.kongqw.serialportlibrary.thread;
 
 import android.util.Log;
 
+import com.kongqw.serialportlibrary.SerialPort;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -17,10 +19,18 @@ public abstract class SerialPortReadThread extends Thread {
     private static final String TAG = SerialPortReadThread.class.getSimpleName();
     private InputStream mInputStream;
     private byte[] mReadBuffer;
+    private byte[] bytes = null;
 
     public SerialPortReadThread(InputStream inputStream) {
         mInputStream = inputStream;
-        mReadBuffer = new byte[1024];
+
+//        mReadBuffer = new byte[1024];
+        try {
+            int bufflenth = inputStream.available();
+            mReadBuffer = new byte[bufflenth];
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

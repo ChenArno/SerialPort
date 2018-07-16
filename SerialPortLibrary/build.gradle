@@ -9,16 +9,17 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-        externalNativeBuild {
-            cmake {
-                arguments '-DANDROID_TOOLCHAIN=clang'
-            }
-        }
+//        externalNativeBuild {
+//            cmake {
+//                arguments '-DANDROID_TOOLCHAIN=clang'
+//            }
+//        }
+//
+//        ndk{
+//            moduleName "SerialPort"
+//            abiFilters "armeabi","armeabi-v7a","x86"
+//        }
 
-        ndk{
-            moduleName "SerialPort"
-            abiFilters "armeabi","armeabi-v7a","x86"
-        }
     }
     buildTypes {
         release {
@@ -27,11 +28,12 @@ android {
         }
     }
 
-    externalNativeBuild {
-        cmake {
-            path "src/main/cpp/CMakeLists.txt"
-        }
-    }
+//    externalNativeBuild {
+//        cmake {
+//            path "src/main/cpp/CMakeLists.txt"
+//        }
+//    }
+
 }
 
 dependencies {
